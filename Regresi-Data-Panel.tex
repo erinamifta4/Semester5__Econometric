@@ -1,0 +1,622 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Data Panel PDRB},
+  pdfauthor={Erina NMJ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Data Panel PDRB}
+\author{Erina NMJ}
+\date{2024-11-29}
+
+\begin{document}
+\maketitle
+
+\subsection{R Markdown}\label{r-markdown}
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see \url{http://rmarkdown.rstudio.com}.
+
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Menghapus kolom \textquotesingle{}region\textquotesingle{}}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{region)}
+
+\CommentTok{\# Mengisi nilai yang hilang dengan rata{-}rata kolom}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.), }\FunctionTok{mean}\NormalTok{(., }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), .)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(reshape2)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{province, }\SpecialCharTok{{-}}\NormalTok{year)}
+
+\CommentTok{\# Matriks korelasi}
+\NormalTok{correlation\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(df, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+
+\CommentTok{\# Visualisasi matriks korelasi}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.95 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{corrplot}\NormalTok{(correlation\_matrix, }\AttributeTok{method =} \StringTok{"color"}\NormalTok{, }\AttributeTok{col =} \FunctionTok{colorRampPalette}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"red"}\NormalTok{))(}\DecValTok{200}\NormalTok{), }\AttributeTok{addCoef.col =} \StringTok{"black"}\NormalTok{, }\AttributeTok{tl.col =} \StringTok{"black"}\NormalTok{, }\AttributeTok{number.cex =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{title =} \StringTok{"Correlation Matrix"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Regresi-Data-Panel_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Korelasi variabel tertentu}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Korelasi dengan variabel \textquotesingle{}GRDP (Gross Regional Domestic Product per Capita)\textquotesingle{}:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Korelasi dengan variabel 'GRDP (Gross Regional Domestic Product per Capita)':
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{sort}\NormalTok{(correlation\_matrix[}\StringTok{"grdp\_capita"}\NormalTok{, ], }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         grdp_capita       grdp_employed       formal_sector                 hdi 
+##          1.00000000          0.99372658          0.69628279          0.50549714 
+##        grdp_nominal     life_expectancy      private_invest     domestic_invest 
+##          0.47072784          0.40249460          0.39965981          0.39539166 
+##       hs_graduation  unemployed_percent         clean_water      foreign_invest 
+##          0.37210418          0.36412152          0.35216833          0.35069094 
+##                  to   decent_sanitation           gov_capex        gov_spending 
+##          0.34592818          0.33984643          0.12132332          0.07625356 
+##                gini population_thousand                agri    health_complaint 
+##          0.01545446         -0.05359435         -0.06571694         -0.17257961 
+##             poverty 
+##         -0.33380890
+\end{verbatim}
+
+\subsection{Including Plots}\label{including-plots}
+
+You can also embed plots, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{split\_year }\OtherTok{\textless{}{-}} \DecValTok{2018}
+
+\CommentTok{\# Membagi data berdasarkan tahun}
+\NormalTok{df1 }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{\textless{}=}\NormalTok{ split\_year)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{\textgreater{}}\NormalTok{ split\_year)}
+
+\CommentTok{\# Model regresi untuk subset}
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ df1)}
+\NormalTok{model2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ df2)}
+
+\CommentTok{\# Model regresi untuk keseluruhan data}
+\NormalTok{model\_full }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ data)}
+
+\CommentTok{\# Chow Test}
+\NormalTok{RSS1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{resid}\NormalTok{(model1)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{RSS2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{resid}\NormalTok{(model2)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{RSS\_full }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{resid}\NormalTok{(model\_full)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{n1 }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(df1)}
+\NormalTok{n2 }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(df2)}
+\NormalTok{k }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{coef}\NormalTok{(model1))}
+
+\NormalTok{numerator }\OtherTok{\textless{}{-}}\NormalTok{ (RSS\_full }\SpecialCharTok{{-}}\NormalTok{ (RSS1 }\SpecialCharTok{+}\NormalTok{ RSS2)) }\SpecialCharTok{/}\NormalTok{ k}
+\NormalTok{denominator }\OtherTok{\textless{}{-}}\NormalTok{ (RSS1 }\SpecialCharTok{+}\NormalTok{ RSS2) }\SpecialCharTok{/}\NormalTok{ (n1 }\SpecialCharTok{+}\NormalTok{ n2 }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ k)}
+\NormalTok{F\_stat }\OtherTok{\textless{}{-}}\NormalTok{ numerator }\SpecialCharTok{/}\NormalTok{ denominator}
+\NormalTok{p\_value }\OtherTok{\textless{}{-}} \FunctionTok{pf}\NormalTok{(F\_stat, }\AttributeTok{df1 =}\NormalTok{ k, }\AttributeTok{df2 =}\NormalTok{ (n1 }\SpecialCharTok{+}\NormalTok{ n2 }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ k), }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Chow Test:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Chow Test:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Nilai F{-}statistik:"}\NormalTok{, F\_stat, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Nilai F-statistik: 2.914288
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"P{-}value:"}\NormalTok{, p\_value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## P-value: 0.02222342
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (p\_value }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Hipotesis Alternatif (H1): Terdapat perbedaan signifikan antara dua periode}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Hipotesis Nol (H0): Tidak terdapat perbedaan signifikan antara dua periode}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hipotesis Alternatif (H1): Terdapat perbedaan signifikan antara dua periode
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plm'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, lag, lead
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Data panel}
+\NormalTok{data\_panel }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(data, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"province"}\NormalTok{, }\StringTok{"year"}\NormalTok{))}
+
+\CommentTok{\# Fixed Effects Model}
+\NormalTok{model\_fe }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ data\_panel, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+\CommentTok{\# Random Effects Model}
+\NormalTok{model\_re }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ data\_panel, }\AttributeTok{model =} \StringTok{"random"}\NormalTok{)}
+
+\CommentTok{\# Hasil}
+\FunctionTok{summary}\NormalTok{(model\_fe)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = grdp_capita ~ grdp_employed + formal_sector + hdi, 
+##     data = data_panel, model = "within")
+## 
+## Balanced Panel: n = 34, T = 7, N = 238
+## 
+## Residuals:
+##     Min.  1st Qu.   Median  3rd Qu.     Max. 
+## -8436.81  -597.07    63.58   691.29  6938.66 
+## 
+## Coefficients:
+##                Estimate Std. Error t-value  Pr(>|t|)    
+## grdp_employed   296.267     21.913 13.5204 < 2.2e-16 ***
+## formal_sector -8867.116   6202.836 -1.4295    0.1544    
+## hdi            1062.313    149.786  7.0922 2.202e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    2571500000
+## Residual Sum of Squares: 945900000
+## R-Squared:      0.63216
+## Adj. R-Squared: 0.56628
+## F-statistic: 115.144 on 3 and 201 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model\_re)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Random Effect Model 
+##    (Swamy-Arora's transformation)
+## 
+## Call:
+## plm(formula = grdp_capita ~ grdp_employed + formal_sector + hdi, 
+##     data = data_panel, model = "random")
+## 
+## Balanced Panel: n = 34, T = 7, N = 238
+## 
+## Effects:
+##                   var std.dev share
+## idiosyncratic 4705956    2169 0.492
+## individual    4853601    2203 0.508
+## theta: 0.6512
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -9698.178 -1030.885    83.336   947.538  7960.608 
+## 
+## Coefficients:
+##                 Estimate Std. Error z-value  Pr(>|z|)    
+## (Intercept)   -35098.972   6954.563 -5.0469 4.490e-07 ***
+## grdp_employed    445.530      8.079 55.1465 < 2.2e-16 ***
+## formal_sector  -6718.950   4651.085 -1.4446    0.1486    
+## hdi              576.313    107.936  5.3394 9.324e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    3.0159e+10
+## Residual Sum of Squares: 1347500000
+## R-Squared:      0.95532
+## Adj. R-Squared: 0.95475
+## Chisq: 5003.17 on 3 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Hausman Test}
+\NormalTok{hausman\_test }\OtherTok{\textless{}{-}} \FunctionTok{phtest}\NormalTok{(model\_fe, model\_re)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Hausman Test:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hausman Test:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(hausman\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hausman Test
+## 
+## data:  grdp_capita ~ grdp_employed + formal_sector + hdi
+## chisq = 58.389, df = 3, p-value = 1.298e-12
+## alternative hypothesis: one model is inconsistent
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Memastikan library plm terinstal dan di{-}load}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"plm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'plm' is in use and will not be installed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plm)}
+
+\CommentTok{\# Membaca data panel}
+\NormalTok{data\_panel }\OtherTok{\textless{}{-}} \FunctionTok{pdata.frame}\NormalTok{(data, }\AttributeTok{index =} \FunctionTok{c}\NormalTok{(}\StringTok{"province"}\NormalTok{, }\StringTok{"year"}\NormalTok{))}
+
+\CommentTok{\# Menjalankan Fixed Effects Model}
+\NormalTok{fixed\_effects\_model }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }
+                           \AttributeTok{data =}\NormalTok{ data\_panel, }
+                           \AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+\CommentTok{\# Ringkasan hasil model}
+\FunctionTok{summary}\NormalTok{(fixed\_effects\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = grdp_capita ~ grdp_employed + formal_sector + hdi, 
+##     data = data_panel, model = "within")
+## 
+## Balanced Panel: n = 34, T = 7, N = 238
+## 
+## Residuals:
+##     Min.  1st Qu.   Median  3rd Qu.     Max. 
+## -8436.81  -597.07    63.58   691.29  6938.66 
+## 
+## Coefficients:
+##                Estimate Std. Error t-value  Pr(>|t|)    
+## grdp_employed   296.267     21.913 13.5204 < 2.2e-16 ***
+## formal_sector -8867.116   6202.836 -1.4295    0.1544    
+## hdi            1062.313    149.786  7.0922 2.202e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    2571500000
+## Residual Sum of Squares: 945900000
+## R-Squared:      0.63216
+## Adj. R-Squared: 0.56628
+## F-statistic: 115.144 on 3 and 201 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Melihat efek individual}
+\NormalTok{fixef\_individual }\OtherTok{\textless{}{-}} \FunctionTok{fixef}\NormalTok{(fixed\_effects\_model)  }
+\FunctionTok{print}\NormalTok{(fixef\_individual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 ACEH                 BALI               BANTEN 
+##               -64415               -58430               -59460 
+##             BENGKULU        DI YOGYAKARTA          DKI JAKARTA 
+##               -62378               -67936               -15330 
+##            GORONTALO                JAMBI           JAWA BARAT 
+##               -59389               -55682               -61669 
+##          JAWA TENGAH           JAWA TIMUR     KALIMANTAN BARAT 
+##               -61033               -55289               -57872 
+##   KALIMANTAN SELATAN    KALIMANTAN TENGAH     KALIMANTAN TIMUR 
+##               -58092               -55871               -30119 
+##     KALIMANTAN UTARA KEP. BANGKA BELITUNG            KEP. RIAU 
+##               -41770               -56672               -44312 
+##              LAMPUNG               MALUKU         MALUKU UTARA 
+##               -59736               -65235               -62019 
+##  NUSA TENGGARA BARAT  NUSA TENGGARA TIMUR                PAPUA 
+##               -61785               -61294               -44880 
+##          PAPUA BARAT                 RIAU       SULAWESI BARAT 
+##               -44553               -47096               -57777 
+##     SULAWESI SELATAN      SULAWESI TENGAH    SULAWESI TENGGARA 
+##               -60345               -54044               -58931 
+##       SULAWESI UTARA       SUMATERA BARAT     SUMATERA SELATAN 
+##               -61317               -61738               -56138 
+##       SUMATERA UTARA 
+##               -58876
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmtest)}
+
+\CommentTok{\# Residuals dari Fixed Effects Model}
+\NormalTok{residuals\_fe }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(model\_fe)}
+
+\CommentTok{\# Uji Breusch{-}Pagan}
+\NormalTok{bp\_test }\OtherTok{\textless{}{-}} \FunctionTok{bptest}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }\AttributeTok{data =}\NormalTok{ data\_panel)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Hasil Uji Heteroskedastisitas Breusch{-}Pagan:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hasil Uji Heteroskedastisitas Breusch-Pagan:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(bp\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  studentized Breusch-Pagan test
+## 
+## data:  grdp_capita ~ grdp_employed + formal_sector + hdi
+## BP = 85.43, df = 3, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plm)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+
+\CommentTok{\# Model Fixed Effects}
+\NormalTok{model\_fixed }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{(grdp\_capita }\SpecialCharTok{\textasciitilde{}}\NormalTok{ grdp\_employed }\SpecialCharTok{+}\NormalTok{ formal\_sector }\SpecialCharTok{+}\NormalTok{ hdi, }
+                   \AttributeTok{data =}\NormalTok{ data\_panel, }\AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+
+\CommentTok{\# Robust Standard Errors}
+\NormalTok{robust\_se }\OtherTok{\textless{}{-}} \FunctionTok{coeftest}\NormalTok{(model\_fixed, }\AttributeTok{vcov =} \FunctionTok{vcovHC}\NormalTok{(model\_fixed, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{))}
+
+\CommentTok{\# Tampilkan hasil dengan standard error yang sudah diperbaiki}
+\FunctionTok{print}\NormalTok{(robust\_se)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##                Estimate Std. Error t value  Pr(>|t|)    
+## grdp_employed   296.267     62.222  4.7615 3.672e-06 ***
+## formal_sector -8867.116   8015.260 -1.1063   0.26993    
+## hdi            1062.313    331.238  3.2071   0.00156 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Menampilkan hasil ringkasan model Fixed Effects}
+\FunctionTok{summary}\NormalTok{(model\_fixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = grdp_capita ~ grdp_employed + formal_sector + hdi, 
+##     data = data_panel, model = "within")
+## 
+## Balanced Panel: n = 34, T = 7, N = 238
+## 
+## Residuals:
+##     Min.  1st Qu.   Median  3rd Qu.     Max. 
+## -8436.81  -597.07    63.58   691.29  6938.66 
+## 
+## Coefficients:
+##                Estimate Std. Error t-value  Pr(>|t|)    
+## grdp_employed   296.267     21.913 13.5204 < 2.2e-16 ***
+## formal_sector -8867.116   6202.836 -1.4295    0.1544    
+## hdi            1062.313    149.786  7.0922 2.202e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    2571500000
+## Residual Sum of Squares: 945900000
+## R-Squared:      0.63216
+## Adj. R-Squared: 0.56628
+## F-statistic: 115.144 on 3 and 201 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Menampilkan formula dari model Fixed Effects}
+\NormalTok{model\_fixed}\SpecialCharTok{$}\NormalTok{formula}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## grdp_capita ~ grdp_employed + formal_sector + hdi
+\end{verbatim}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+
+\end{document}

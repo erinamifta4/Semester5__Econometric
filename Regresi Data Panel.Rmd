@@ -1,0 +1,187 @@
+---
+title: "Data Panel PDRB"
+author: "Erina NMJ"
+date: "2024-11-29"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+library(dplyr)
+
+data <- read_excel("C:/Users/USER/Documents/GitHub/Semester5__Econometric/data/clean_dat_inclusive growth determinants.xlsx")
+
+# Deskripsi data
+summary(data)
+str(data)
+
+# Cek data yang hilang
+colSums(is.na(data))
+```
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+# Menghapus kolom 'region'
+data <- data %>% select(-region)
+
+# Mengisi nilai yang hilang dengan rata-rata kolom
+data <- data %>% mutate(across(everything(), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
+
+```
+```{r}
+library(ggplot2)
+library(reshape2)
+
+df <- data %>% select(-province, -year)
+
+# Matriks korelasi
+correlation_matrix <- cor(df, use = "complete.obs")
+
+# Visualisasi matriks korelasi
+library(corrplot)
+corrplot(correlation_matrix, method = "color", col = colorRampPalette(c("blue", "white", "red"))(200), addCoef.col = "black", tl.col = "black", number.cex = 0.7, title = "Correlation Matrix")
+
+# Korelasi variabel tertentu
+cat("Korelasi dengan variabel 'GRDP (Gross Regional Domestic Product per Capita)':\n")
+print(sort(correlation_matrix["grdp_capita", ], decreasing = TRUE))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+library(lmtest)
+
+split_year <- 2018
+
+# Membagi data berdasarkan tahun
+df1 <- data %>% filter(year <= split_year)
+df2 <- data %>% filter(year > split_year)
+
+# Model regresi untuk subset
+model1 <- lm(grdp_capita ~ grdp_employed + formal_sector + hdi, data = df1)
+model2 <- lm(grdp_capita ~ grdp_employed + formal_sector + hdi, data = df2)
+
+# Model regresi untuk keseluruhan data
+model_full <- lm(grdp_capita ~ grdp_employed + formal_sector + hdi, data = data)
+
+# Chow Test
+RSS1 <- sum(resid(model1)^2)
+RSS2 <- sum(resid(model2)^2)
+RSS_full <- sum(resid(model_full)^2)
+
+n1 <- nrow(df1)
+n2 <- nrow(df2)
+k <- length(coef(model1))
+
+numerator <- (RSS_full - (RSS1 + RSS2)) / k
+denominator <- (RSS1 + RSS2) / (n1 + n2 - 2 * k)
+F_stat <- numerator / denominator
+p_value <- pf(F_stat, df1 = k, df2 = (n1 + n2 - 2 * k), lower.tail = FALSE)
+
+cat("Chow Test:\n")
+cat("Nilai F-statistik:", F_stat, "\n")
+cat("P-value:", p_value, "\n")
+
+if (p_value < 0.05) {
+  cat("Hipotesis Alternatif (H1): Terdapat perbedaan signifikan antara dua periode\n")
+} else {
+  cat("Hipotesis Nol (H0): Tidak terdapat perbedaan signifikan antara dua periode\n")
+}
+```
+```{r}
+library(plm)
+
+# Data panel
+data_panel <- pdata.frame(data, index = c("province", "year"))
+
+# Fixed Effects Model
+model_fe <- plm(grdp_capita ~ grdp_employed + formal_sector + hdi, data = data_panel, model = "within")
+
+# Random Effects Model
+model_re <- plm(grdp_capita ~ grdp_employed + formal_sector + hdi, data = data_panel, model = "random")
+
+# Hasil
+summary(model_fe)
+summary(model_re)
+
+# Hausman Test
+hausman_test <- phtest(model_fe, model_re)
+cat("Hausman Test:\n")
+print(hausman_test)
+
+```
+```{r}
+# Memastikan library plm terinstal dan di-load
+install.packages("plm")
+library(plm)
+
+# Membaca data panel
+data_panel <- pdata.frame(data, index = c("province", "year"))
+
+# Menjalankan Fixed Effects Model
+fixed_effects_model <- plm(grdp_capita ~ grdp_employed + formal_sector + hdi, 
+                           data = data_panel, 
+                           model = "within")
+
+# Ringkasan hasil model
+summary(fixed_effects_model)
+
+# Melihat efek individual
+fixef_individual <- fixef(fixed_effects_model)  
+print(fixef_individual)
+```
+```{r}
+library(lmtest)
+
+# Residuals dari Fixed Effects Model
+residuals_fe <- residuals(model_fe)
+
+# Uji Breusch-Pagan
+bp_test <- bptest(grdp_capita ~ grdp_employed + formal_sector + hdi, data = data_panel)
+cat("Hasil Uji Heteroskedastisitas Breusch-Pagan:\n")
+print(bp_test)
+
+```
+
+```{r}
+library(plm)
+library(lmtest)
+library(sandwich)
+
+# Model Fixed Effects
+model_fixed <- plm(grdp_capita ~ grdp_employed + formal_sector + hdi, 
+                   data = data_panel, model = "within")
+
+# Robust Standard Errors
+robust_se <- coeftest(model_fixed, vcov = vcovHC(model_fixed, type = "HC1"))
+
+# Tampilkan hasil dengan standard error yang sudah diperbaiki
+print(robust_se)
+
+
+```
+```{r}
+# Menampilkan hasil ringkasan model Fixed Effects
+summary(model_fixed)
+# Menampilkan formula dari model Fixed Effects
+model_fixed$formula
+
+```
+```{r}
+
+```
+```{r}
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
