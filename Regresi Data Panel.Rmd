@@ -169,13 +169,7 @@ print(robust_se)
 
 
 ```
-```{r}
-# Menampilkan hasil ringkasan model Fixed Effects
-summary(model_fixed)
-# Menampilkan formula dari model Fixed Effects
-model_fixed$formula
 
-```
 ```{r}
 
 ```
